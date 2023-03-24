@@ -23,17 +23,21 @@ if (isset($_GET['id'])) {
         <div class="col s12 m12 l12 xl12">
             <div class="card">
                 <div class="product-image-gallery">
-                    <a href="<?= $product['image'] ?>" target="_blank">
-                        <img src="<?= $product['image'] ?>" alt="product image" id="product-image" />
-                    </a>
-
-                    <a href="<?= $product['image2'] ?>" target="_blank">
-                        <img src="<?= $product['image2'] ?>" alt="product image" id="product-image" />
-                    </a>
-
-                    <a href="<?= $product['image3'] ?>" target="_blank">
-                        <img src="<?= $product['image3'] ?>" alt="product image" id="product-image" />
-                    </a>
+                    <?php if ($product['image']) : ?>
+                        <a href="<?= $product['image'] ?>" target="_blank">
+                            <img src="<?= $product['image'] ?>" alt="product image" id="product-image" />
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($product['image2']) : ?>
+                        <a href="<?= $product['image2'] ?>" target="_blank">
+                            <img src="<?= $product['image2'] ?>" alt="product image" id="product-image" />
+                        </a>
+                    <?php endif; ?>
+                    <?php if ($product['image2']) : ?>
+                        <a href="<?= $product['image3'] ?>" target="_blank">
+                            <img src="<?= $product['image3'] ?>" alt="product image" id="product-image" />
+                        </a>
+                    <?php endif; ?>
                 </div>
 
                 <div class="card-content center">

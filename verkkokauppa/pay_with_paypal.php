@@ -19,7 +19,7 @@ require "templates/header.php";
 
 <div class="container center">
 
-    <script src="xxx"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AT6P8Rd5g6yER5XrjsM8O7jts3togLy7O3mE-TgjKJw_9dB58TgHcR71lwj73514Zq4fU-oYszMo9MUE"></script>
 
     <div id="paypal"></div>
 

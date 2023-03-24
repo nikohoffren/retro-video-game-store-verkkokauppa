@@ -64,7 +64,7 @@
                     <li>
                         <div class="collapsible-header"><i class="blue-text material-icons">local_offer</i>Tilausnumero: <?= $order['id'] ?>
                             <span>
-                                <p><span class="tab"></span>Maksun tila:
+                                <p class="black-text"><span class="tab"></span>Maksun tila:
                                     <?php if ($order['status'] == 0) : ?>
                                         <p class="red-text"><span class="tab"></span><?= 'maksamatta'; ?></p>
                                     <?php else : ?>
@@ -75,10 +75,10 @@
                         </div>
                         <div class="collapsible-body white">
                             <span>
-                                <h6><span class="bold">Päivämäärä:</span> <?= $order['create_date'] ?></h6>
-                                <h6><span class="bold">Hinta yhteensä:</span> <?= round($order['total'], 2) ?> €</h6>
-                                <h6><span class="bold">Veroton hinta yhteensä:</span> <?= round($order['total_no_tax'], 2) ?> €</h6>
-                                <h6><span class="bold">Tuotteet:</span><br />
+                                <h6 class="black-text"><span class="bold">Päivämäärä:</span> <?= $order['create_date'] ?></h6>
+                                <h6 class="black-text"><span class="bold">Hinta yhteensä:</span> <?= round($order['total'], 2) ?> €</h6>
+                                <h6 class="black-text"><span class="bold">Veroton hinta yhteensä:</span> <?= round($order['total_no_tax'], 2) ?> €</h6>
+                                <h6 class="black-text"><span class="bold">Tuotteet:</span><br />
                                     <?php
                                         $products = $user->getUserOrderProducts($order['id']);
                                         foreach ($products as $product) {
@@ -117,13 +117,13 @@
                     <img src="<?= $_SESSION['fb_user_picture'] ?>" alt="Facebook user image" />
                 </div>
                 <h6 class="grey-text text-darken-2">
-                    Etunimi: <span class="black-text"><?= $userdata['first_name'] ?></span>
+                    Etunimi: <span class="theme-text"><?= $userdata['first_name'] ?></span>
                 </h6>
                 <h6 class="grey-text text-darken-2">
-                    Sukunimi: <span class="black-text"><?= $userdata['last_name'] ?></span>
+                    Sukunimi: <span class="theme-text"><?= $userdata['last_name'] ?></span>
                 </h6>
                 <h6 class="grey-text text-darken-2">
-                    Sähköpostiosoite: <span class="black-text"><?= $userdata['email'] ?></span>
+                    Sähköpostiosoite: <span class="theme-text"><?= $userdata['email'] ?></span>
                 </h6>
             </div>
         <?php endif; ?>

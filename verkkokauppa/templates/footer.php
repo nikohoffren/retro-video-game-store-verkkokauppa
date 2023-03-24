@@ -40,7 +40,7 @@
 </footer>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="xxx"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AT6P8Rd5g6yER5XrjsM8O7jts3togLy7O3mE-TgjKJw_9dB58TgHcR71lwj73514Zq4fU-oYszMo9MUE"></script>
 
 <script type="text/javascript">
     //* search bar setup

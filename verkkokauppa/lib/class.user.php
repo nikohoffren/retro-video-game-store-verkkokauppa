@@ -18,6 +18,7 @@ class User extends Base
     public $session_id;
     public $order_id;
     public $lastlogin;
+    public $message;
     public $fb_user_id;
     public $fb_access_token;
 

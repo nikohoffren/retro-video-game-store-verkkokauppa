@@ -60,6 +60,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: all 0.4s ease-in-out;
 }
 
 html, body {
@@ -95,6 +96,9 @@ h1, h2, h3, h4, h5, h6, p {
 .product-image-gallery img:hover {
     filter: grayscale(0%);
     transform: scale(1.4);
+}
+.product-image-gallery a:hover {
+    animation: none;
 }
 @media (max-width: 900px) {
     .product-image-gallery img {

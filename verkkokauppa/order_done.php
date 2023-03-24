@@ -2,6 +2,7 @@
 
 session_start();
 require "config/db_connect.php";
+include_once "lib/class.user.php";
 require "templates/header.php";
 
 $user = new User($_SESSION['id'], $mysqli_conn, "users");
@@ -10,10 +11,46 @@ $user_orders = $user->getUniqueUserOrders();
 $latest_order = end($user_orders);
 $order_products = $user->getUserOrderProducts($latest_order['id']);
 $delivery_cost = $_COOKIE['delivery_cost'];
+$userdata = $user->getUserData();
 
 //? if customer has chosen to pay with a check
-if ($_COOKIE['payment_type'] == "check") {
-    $user->sendEmail();
+if ($_COOKIE['payment_type'] == "check" && $_SESSION['counter'] == 1) {
+    ini_set('display errors', 1);
+    error_reporting(E_ALL);
+    $user->message = '<h4>Tervehdys ' .$userdata['first_name']. ' ' .$userdata['last_name']. '!</h4>Ohessa lasku Retro Video Games -verkkokaupassa tekemästäsi ostoksesta. Maksathan sen seitsemän (7) arkipäivän sisällä!<br /><br />Hinta yhteensä: ' .round($latest_order['total'], 2). '€<br /><br />';
+    $headers = "From: Retro Video Games <retro@retrogames.com>\r\n";
+    $headers .= "Reply-To: reply@retrogames.com\r\n";
+    $headers .= "Content-type: text/html\r\n";
+
+    //* send email to customer
+    if (mail($userdata['email'], 'Lasku', $user->message, $headers)) {
+        header("Location: order_done.php?messagesent=1");
+    } else {
+        header("Location: order_done");
+    }
+}
+
+foreach ($order_products as $product) {
+    $arr[] = $product['name'] . ", ";
+    $arr[] = $product['quantity'] . " kpl" . "<br>";
+}
+$arr_result = implode(" ",$arr);
+
+if ($_SESSION['counter'] == 1) {
+    ini_set('display errors', 1);
+    error_reporting(E_ALL);
+    $user->message = '<h4>Tervehdys ' .$userdata['first_name']. ' ' .$userdata['last_name']. '!</h4>Ohessa tilausvahvistus Retro Video Games -verkkokaupassa tekemästäsi ostoksesta.<br /><br />Hinta yhteensä: ' .round($latest_order['total'], 2). '€<br /><br /><h5>Tilaamasi tuotteet:</h5>' .$arr_result. '';
+    $headers = "From: Retro Video Games <retro@retrogames.com>\r\n";
+    $headers .= "Reply-To: reply@retrogames.com\r\n";
+    $headers .= "Content-type: text/html\r\n";
+    $_SESSION['counter'] = 0;
+
+    //* send email to customer
+    if (mail($userdata['email'], 'Tilausvahvistus', $user->message, $headers)) {
+        header("Location: order_done.php?messagesent=1");
+    } else {
+        header("Location: order_done");
+    }
 }
 
 ?>
@@ -24,6 +61,7 @@ if ($_COOKIE['payment_type'] == "check") {
 <div class="container center">
     <div class="margin-bottom">
         <h4>Kiitos tilauksesta!</h4>
+        <p>Tilausvahvistus lähetetty ilmoittamaasi sähköpostiosoitteeseen.</p>
         <h5>Yhteenveto:</h5>
         <div class="margin">
             <h6>Tilausnumero: <?= $latest_order['id'] ?></h6>

@@ -12,6 +12,9 @@ $cart->customer_id = $_SESSION['id'];
     $cart_result = $cart->getAllProductsFromCart();
 }
 
+//? terms of service reset
+$_SESSION['terms_of_service'] = "accepted";
+
 ?>
 
 <script>
