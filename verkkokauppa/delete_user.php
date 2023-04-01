@@ -1,8 +1,7 @@
+<?php include_once "templates/header.php"; ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
-<?php include "templates/header.php"; ?>
 
 <div class="container center">
     <div class="container center">

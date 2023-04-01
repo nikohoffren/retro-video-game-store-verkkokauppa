@@ -16,8 +16,9 @@
     $total_notax = $total - $tax;
     $cart->cart_total = $total + $delivery_cost;
     $cart->cart_total_notax = $total_notax + $delivery_cost;
-
     $cart->status = 1;
+    $cart->finish_date = 1;
+
     if ($delivery_cost == 0) {
         $cart->delivery_method = 'free';
         echo 'Toimitus lähimpään postiin 3-5:ssä arkipäivässä (0 €)';

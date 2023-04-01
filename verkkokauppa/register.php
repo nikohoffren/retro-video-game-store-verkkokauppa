@@ -3,6 +3,7 @@
 session_start();
 require "config/db_connect.php";
 require_once "lib/class.user.php";
+require_once "templates/header.php";
 
 $errors = array('username'=>"", 'password'=>"", 'password2'=>"", 'email'=>"");
 $user = new User($_SESSION['id'], $mysqli_conn, "user");
@@ -63,8 +64,6 @@ if (isset($_POST['submit'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
-<?php require('templates/header.php'); ?>
 
 <div class="container center">
     <h4>REKISTERÖIDY</h4>

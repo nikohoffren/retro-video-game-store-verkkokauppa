@@ -11,7 +11,7 @@ $user_orders = $user->getUniqueUserOrders();
 $latest_order = end($user_orders);
 $order_products = $user->getUserOrderProducts($latest_order['id']);
 $delivery_cost = $_COOKIE['delivery_cost'];
-$userdata = $user->getUserData();
+$userdata = $user->getCustomerData();
 
 //? if customer has chosen to pay with a check
 if ($_COOKIE['payment_type'] == "check" && $_SESSION['counter'] == 1) {
@@ -24,7 +24,7 @@ if ($_COOKIE['payment_type'] == "check" && $_SESSION['counter'] == 1) {
 
     //* send email to customer
     if (mail($userdata['email'], 'Lasku', $user->message, $headers)) {
-        header("Location: order_done.php?messagesent=1");
+        header("Location: order_done/messagesent");
     } else {
         header("Location: order_done");
     }
@@ -47,7 +47,7 @@ if ($_SESSION['counter'] == 1) {
 
     //* send email to customer
     if (mail($userdata['email'], 'Tilausvahvistus', $user->message, $headers)) {
-        header("Location: order_done.php?messagesent=1");
+        header("Location: order_done/messagesent");
     } else {
         header("Location: order_done");
     }

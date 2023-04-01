@@ -33,5 +33,3 @@ class Page extends Base
         return $pages;
     }
 }
-
-?>

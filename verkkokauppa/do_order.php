@@ -22,6 +22,7 @@
             $cart->customer_id = $_SESSION['id'];
             $delivery_method = $cart->delivery_method;
             $total = $cart->getCartTotal();
+            $cart->finish_date = 0;
             $tax = $total / 7;
             $total_notax = $total - $tax;
             $cart->cart_total = $total + $delivery_cost;

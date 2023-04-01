@@ -10,6 +10,7 @@ class Cart extends Base
     public $order_id;
     public $add_date;
     public $create_date;
+    public $finish_date;
     public $session_id;
     public $cart_total;
     public $cart_total_notax;
@@ -111,15 +112,28 @@ class Cart extends Base
     }
 
     public function addOrder() : bool {
-        $query = $this->sql->query("INSERT INTO orders (customer_id, session_id, create_date, total, total_no_tax, status, delivery_method) VALUES(
-            '".$this->id."',
-            '".$this->session_id."',
-            NOW(),
-            '".$this->cart_total."',
-            '".$this->cart_total_notax."',
-            '".$this->status."',
-            '".$this->delivery_method."'
-            )");
+        if ($this->finish_date == 1) {
+            $query = $this->sql->query("INSERT INTO orders (customer_id, session_id, create_date, finish_date, total, total_no_tax, status, delivery_method) VALUES(
+                '".$this->id."',
+                '".$this->session_id."',
+                NOW(),
+                NOW(),
+                '".$this->cart_total."',
+                '".$this->cart_total_notax."',
+                '".$this->status."',
+                '".$this->delivery_method."'
+                )");
+        } else {
+            $query = $this->sql->query("INSERT INTO orders (customer_id, session_id, create_date, total, total_no_tax, status, delivery_method) VALUES(
+                '".$this->id."',
+                '".$this->session_id."',
+                NOW(),
+                '".$this->cart_total."',
+                '".$this->cart_total_notax."',
+                '".$this->status."',
+                '".$this->delivery_method."'
+                )");
+        }
 
         if ($query) {
             return true;
@@ -178,5 +192,3 @@ class Cart extends Base
         }
     }
 }
-
-?>

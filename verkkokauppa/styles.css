@@ -47,11 +47,33 @@
     --card-background: rgb(30, 30, 30);
 }
 
+.image-container {
+    width: 100%;
+    margin-bottom: 10%;
+}
+
+.image-container img {
+    width: 80%;
+    height: 45%;
+}
+
+.small-container {
+    padding-left: 7rem;
+    padding-right: 7rem;
+}
+
 .theme-text {
     color: var(--clr-neutral-900);
 }
 .card {
     background-color: var(--card-background);
+}
+
+@media (max-width: 1200px) {
+    .small-container {
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
+    }
 }
 
 *,
@@ -364,6 +386,10 @@ a:hover {
     width: var(--fz-accent-800);
 }
 
+.border-radius-header-image {
+    border-radius: 5%;
+}
+
 .img-container {
     border-radius: 50%;
 }
@@ -373,7 +399,6 @@ a:hover {
     width: 130px;
     position: relative;
     border: 1px solid #DDD;
-    padding: 4px;
     background: #FFF;
     border-radius: 50%;
     box-shadow: 0 1px 3px 0 rgba(75,75,75,0.5);
@@ -430,6 +455,27 @@ code {
   font-size: 85%;
 }
 
+@media (max-width: 850px) {
+    .image-container img {
+        width: 100%;
+        height: 30%;
+    }
+}
+
+@media (max-width: 430px) {
+    .image-container img {
+        width: 100%;
+        height: 20%;
+    }
+}
+
+@media (max-width: 340px) {
+    .image-container img {
+        width: 100%;
+        height: 10%;
+    }
+}
+
 @media (max-width: 1200px) {
     .text-box h1 {
         font-size: 40px;
@@ -458,14 +504,13 @@ code {
         width: 20px;
         height: 20px;
         color: rgb(255, 250, 187);
-        margin: 20px;
+        margin: 15px;
         font-size: 22px;
         cursor: pointer;
     }
 
     .nav-links ul {
-        padding: 30px;
-        margin-top: 4rem;
+        margin-top: 7rem;
     }
 
     .icons-header .fa {

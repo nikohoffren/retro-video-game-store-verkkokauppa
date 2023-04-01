@@ -130,6 +130,18 @@ class User extends Base
         }
     }
 
+    public function getCustomerData() {
+        $query = "SELECT * FROM customer WHERE session_id = '$this->session_id'";
+        $result = mysqli_query($this->sql, $query);
+        $row = mysqli_fetch_assoc($result);
+
+        if (mysqli_num_rows($result) > 0) {
+            return $row;
+        } else {
+            return null;
+        }
+    }
+
     public function getUserOrders() {
         $result = $this->sql->query("SELECT * FROM order_items JOIN orders ON order_items.order_id = orders.id WHERE customer_id = '$this->id'");
         $order_items = [];

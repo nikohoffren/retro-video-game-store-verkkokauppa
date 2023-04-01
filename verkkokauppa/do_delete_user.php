@@ -8,7 +8,6 @@ if ($_SESSION['logged_in']) {
     $user_id = $_SESSION['id'];
     $user = new User($user_id, $mysqli_conn, "users");
 
-    //? Tarkistetaan ja tallennetaan tietokantaan
     if ($user->delete()) {
         //? success
         sleep(1);
@@ -23,5 +22,3 @@ if ($_SESSION['logged_in']) {
 
 session_unset();
 session_destroy();
-
-?>

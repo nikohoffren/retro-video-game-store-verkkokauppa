@@ -3,6 +3,7 @@
 session_start();
 require "config/db_connect.php";
 include_once "lib/class.user.php";
+include_once "templates/header.php";
 
 $user = new User($_SESSION['id'], $mysqli_conn, "users");
 $user->session_id = session_id();
@@ -75,7 +76,7 @@ if (isset($_POST['submit'])) {
 
         //* send email to niko.hoffren@gmail.com
         if (mail('niko.hoffren@gmail.com', 'Sait viestin käyttäjältä ' .$user->first_name. ' ' .$user->last_name. ' ', $mail, $headers)) {
-            header("Location: contact.php?messagesent=1");
+            header("Location: contact/messagesent");
         } else {
             header("Location: contact");
         }
@@ -87,12 +88,12 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require('templates/header.php'); ?>
     <br />
     <div class="container">
     <?php if ($_GET['messagesent'] == 1) : ?>
         <div class="container center theme-text">
             <h4>KIITOS YHTEYDENOTOSTASI!</h4>
+            <h6>Otamme yhteyttä ilmoittamaasi sähköpostiosoitteeseen tai puhelinnumeroon mahdollisimman pian.</h6>
             <br /><br /><br />
             <a href="./" class="btn-small custom-linear-gradient-2">TAKAISIN ETUSIVULLE</a>
             <br /><br /><br />
@@ -105,31 +106,31 @@ if (isset($_POST['submit'])) {
         <br />
         <form class="form" action="contact" method="POST">
             <div class="center">
-                <label class="big-text-1 grey-text" for="firstname">Etunimesi:</label>
+                <label class="big-text-1 grey-text text-darken-2" for="firstname">Etunimesi:</label>
                 <input autofocus autocomplete="off" type="text" class="center theme-text" name="firstname" value="<?= $userdata['first_name'] ?>">
                     <div class="red-text small-text-1"><?= $errors['firstname']; ?></div>
             </div>
 
             <div class="center">
-                <label class="big-text-1 grey-text" for="lastname">Sukunimesi:</label>
+                <label class="big-text-1 grey-text text-darken-2" for="lastname">Sukunimesi:</label>
                 <input autofocus autocomplete="off" type="text" class="center theme-text" name="lastname" value="<?= $userdata['last_name'] ?>">
                     <div class="red-text small-text-1"><?= $errors['lastname']; ?></div>
             </div>
 
             <div class="center">
-                <label class="big-text-1 grey-text" for="phone">Puhelinnumero:</label>
+                <label class="big-text-1 grey-text text-darken-2" for="phone">Puhelinnumero:</label>
                 <input autocomplete="off" type="text" class="center theme-text" name="phone" value="<?= $userdata['phone'] ?>">
                     <div class="red-text small-text-1"><?= $errors['phone']; ?></div>
             </div>
 
             <div class="center">
-                <label class="big-text-1 grey-text" for="email">Sähköpostiosoite:</label>
+                <label class="big-text-1 grey-text text-darken-2" for="email">Sähköpostiosoite:</label>
                 <input autocomplete="off" type="text" class="center theme-text" name="email" value="<?= $userdata['email'] ?>">
                     <div class="red-text small-text-1"><?= $errors['email']; ?></div>
             </div>
 
             <div class="center">
-                <label class="big-text-1 grey-text" for="email">Viestisi:</label><br />
+                <label class="big-text-1 grey-text text-darken-2" for="email">Viestisi:</label><br />
                     <div class="input-field">
                         <textarea autocomplete="off" type="text" class="center theme-text materialize-textarea" rows="10" columns="10" name="message" value="<?= $message ?>"></textarea>
                             <div class="red-text small-text-1"><?= $errors['message']; ?></div>

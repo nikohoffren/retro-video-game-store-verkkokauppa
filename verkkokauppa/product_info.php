@@ -3,6 +3,7 @@
 session_start();
 require "config/db_connect.php";
 include_once "lib/class.product.php";
+include_once "templates/header.php";
 
 //? get ID from database
 if (isset($_GET['id'])) {
@@ -15,8 +16,6 @@ if (isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
-<?php include "templates/header.php"; ?>
 
 <div class="container center">
     <div class="row">

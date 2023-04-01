@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require "config/db_connect.php";
 include_once "lib/class.page.php";

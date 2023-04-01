@@ -18,6 +18,7 @@ $_SESSION['terms_of_service'] = "accepted";
 ?>
 
 <script>
+    //? set the payment type and delivery cost cookies
     document.cookie = "payment_type = " + 'check'
     document.cookie = "delivery_cost = " + 0
 </script>
@@ -62,20 +63,6 @@ $_SESSION['terms_of_service'] = "accepted";
 
     //* create fetch function
     const getData = async () => {
-        // try {
-        //     const response = 'ajax.product.php'
-        //     const response2 = 'ajax.product2.php'
-        //     const results = await Promise.all([
-        //         fetch(response),
-        //         fetch(response2)
-        //     ])
-        //     const dataPromises = results.map(result => result.json())
-        //     const data = await Promise.all(dataPromises)
-        //     return data
-        // } catch (error) {
-        //     console.error(error);
-        // }
-
         try {
             const response = await fetch('ajax.product.php')
             const data = await response.json()

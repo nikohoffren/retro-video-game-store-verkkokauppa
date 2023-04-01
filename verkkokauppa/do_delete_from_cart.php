@@ -18,5 +18,3 @@ if (isset($_GET['id'])) {
         echo 'query error: ' . mysqli_error($conn);
     }
 }
-
-?>

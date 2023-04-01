@@ -6,6 +6,7 @@ include_once "lib/class.base.php";
 include_once "lib/class.page.php";
 include_once "lib/class.user.php";
 include_once "lib/class.cart.php";
+include_once "lib/class.product.php";
 
 if (!empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
@@ -50,7 +51,7 @@ endif; ?>
 <body class="black">
 
   <nav class="custom-linear-gradient nav-extended">
-        <div class="container nav-links" id="navLinks">
+        <div class="small-container nav-links" id="navLinks">
             <?php ob_start(); ?>
 
             <!-- Mobile close icon and function call -->
@@ -59,26 +60,28 @@ endif; ?>
                 <ul>
                     <li>
                         <div class="img-container">
-                            <a href="./" class="left down header-logo margin-small margin-right">
+                            <a href="./" class="left down header-logo margin-small margin-right border-radius-header-image">
                                 <img src="img/retro-games-logo.jpg" alt="retro-games logo" />
                             </a>
                         </div>
                     </li>
-                    <li class="medium-margin-right">
+
+                    <li id="nav-button" class="medium-margin-right margin-left">
                         <div class="search-wrapper">
                             <input type="search" id="search" class="white-text" data-search>
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         </div>
                         <div class="product-search-cards hide" data-product-search-cards-container></div>
                         <template data-product-search-template>
-                            <a href="" class="data-card">
+                            <a href="products/id/1" class="data-card">
+                            <!-- <a href="products/id/${product.id}" class="data-card"> -->
                                 <div class="data-header" data-header></div>
                                 <div class="data-body" data-body></div>
-                                <span data-href></span>
+                                <!-- <span data-href></span> -->
                             </a>
                         </template>
                     </li>
-                    <li>
+                    <li id="cart-button" class="">
                         <a id="shoppingCartButton" href="cart" class="btn-small z-depth-1 custom-linear-gradient-2 white-text">
                             <i class="material-icons">shopping_cart</i>
                             <div class="cart-badge-container">
@@ -86,7 +89,7 @@ endif; ?>
                             </div>
                         </a>
                     </li>
-                    <li>
+                    <li id="nav-button" class="">
                         <a id="loginButton" href="login" class="btn-small z-depth-1 custom-linear-gradient-2 white-text username-chars">
                             <i class="material-icons left">person_outline</i>
                             <?php
@@ -100,14 +103,14 @@ endif; ?>
                         </a>
                     </li>
                     <?php if ($_SESSION['logged_in']): ?>
-                        <li class="margin-top-mobile">
+                        <li id="nav-button" class="margin-top-mobile">
                             <a id="logoutButton" href="do_logout.php" class="btn-small z-depth-1 blue username-chars">
                                 <i class="material-icons left">exit_to_app</i>
                                 <span>ULOS</span>
                             </a>
                         </li>
                     <?php endif; ?>
-                    <li>
+                    <li id="nav-button" class="small-margin-right">
                         <img src="img/sun.png" alt="light/dark theme toggle" id="colorThemeIcon">
                     </li>
                 </ul>
@@ -115,7 +118,6 @@ endif; ?>
                 <script>
                     //* light/dark theme toggle logic
                     const colorThemeIcon = document.querySelector("#colorThemeIcon")
-
 
                     //* Retrieve the user's preference for the theme from local storage
                     const theme = localStorage.getItem("theme")
@@ -177,19 +179,19 @@ endif; ?>
                     .then(res => res.json())
                     .then(data => {
                         products = data.map(product => {
-                        const card = productSearchCardTemplate.content.cloneNode(true).children[0]
-                        const header = card.querySelector("[data-header]")
-                        const body = card.querySelector("[data-body]")
-                        const href = card.querySelector("[data-href]")
-                        header.textContent = product.name
-                        body.textContent = `Hinta: ${product.price} €`
-                        // href.textContent = `Kategoria: ${product.category}`
-                        productSearchCardContainer.append(card)
+                            const card = productSearchCardTemplate.content.cloneNode(true).children[0]
+                            const header = card.querySelector("[data-header]")
+                            const body = card.querySelector("[data-body]")
+                            // const href = card.querySelector("[data-href]")
+                            header.textContent = product.name
+                            body.textContent = `Hinta: ${product.price} €`
+                            // href.textContent = `products/id/${product.id}`
+                            productSearchCardContainer.append(card)
 
-                        return { name: product.name, price: product.price, href: product.category, element: card }
-
+                            return { name: product.name, price: product.price, element: card }
                         })
                     })
+
                 </script>
 
             <ul id="nav-mobile" class="right center">
@@ -198,10 +200,19 @@ endif; ?>
                     $page = new Page($_SESSION['id'], $mysqli_conn, "pages");
                     $result = $page->getAllPages();
                     foreach ($result as $pages) {
-                        echo '<li><a href="'.$pages['alias'].'" class="btn-small z-depth-1 custom-linear-gradient-button white-text">'.$pages['name'].'</a></li>';
+                        echo '<li><a href="'.$pages['alias'].'" id="pageButton" class="btn-small z-depth-1 custom-linear-gradient-button white-text">'.$pages['name'].'</a></li>';
                     }
                 ?>
             </ul>
+
+            <script>
+                //* adjust the size of the page buttons on mobile
+                const pageHref = document.querySelector("#pageButton")
+
+                if (window.innerWidth < 1200) {
+                    pageHref.classList.add("username-chars")
+                }
+            </script>
         </div>
 
         <!-- Mobile open icon and function call -->

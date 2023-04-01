@@ -10,5 +10,3 @@ $user->logout();
 if ($cart->getAllProductsFromCart()) {
     $cart->emptyCart();
 }
-
-?>
