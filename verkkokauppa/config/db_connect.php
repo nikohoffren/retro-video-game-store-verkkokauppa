@@ -1,8 +1,8 @@
 <?php
 
 //? connect to database
-    $conn = mysqli_connect('sakky.luowa.fi', 'niko_hoffren', 'Xyp!u378', 'sakky_niko_hoffren');
-    $mysqli_conn = new mysqli('sakky.luowa.fi', 'niko_hoffren', 'Xyp!u378', 'sakky_niko_hoffren');
+    $conn = mysqli_connect();
+    $mysqli_conn = new mysqli();
 
 //? check connection
     if (!$conn) {
